@@ -1,37 +1,58 @@
-import time
-
 import requests
+import smtplib
 from bs4 import BeautifulSoup
 
-# Set the URL of the website you want to monitor
-url = 'https://owlexpress.kennesaw.edu/prodban/bwckschd.p_disp_detail_sched?term_in=202301&crn_in=15228'
+# Target URL
+url = ''
 
-# Set the CSS selector for the element you want to monitor
-selector = '.dddefault'
+# Class you want to target
+selector = 'dddefault'
 
-# Set the initial value of the element
+# Create a previous value
 prev_value = ''
 
-counter = 0
+# Make a request to  website
+response = requests.get(url)
 
-while True:
-    # Make a request to the website
-    response = requests.get(url)
+# Parse the HTML using BeautifulSoup
+soup = BeautifulSoup(response.text, 'html.parser')
 
-    # Parse the HTML using BeautifulSoup
-    soup = BeautifulSoup(response.text, 'html.parser')
+# Get a list of all elements of specific class
+elements = soup.find_all("", class_=selector)
 
-    # Get the value of the element using the CSS selector
-    element = soup.select_one(selector)
-    if element:
-        value = element.text
+prev_class_4 = elements[3]
 
-    # Check if the value has changed
-    if value != prev_value:
-        # Print the new value
-        print(value+"one")
-        # Update the previous value
-        prev_value = value
+for i, element in enumerate(elements):
+    if i == 3:
+        if element != prev_class_4:
+            print("Class 4 has changed!")
+            prev_class_4 = element
 
-    time.sleep(5)
+# Set email and password
+username = "your_email"
+password = ""
 
+# Set to email
+to_email = "recipient_email"
+
+# Create an SMTP object
+smtp = smtplib.SMTP('smtp_server', port_number)
+
+# Connect to the SMTP server
+smtp.starttls()
+smtp.login(username, password)
+
+# Set the sender and recipient of the email
+sender = username
+recipient = to_email
+
+# Set the subject and body of the email
+subject = ""
+body = ""
+
+# Format the email message
+msg = f"Subject: {subject}\n\n{body}"
+
+# Send the email
+smtp.sendmail(sender, recipient, msg)
+smtp.quit()
