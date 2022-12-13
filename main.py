@@ -2,31 +2,23 @@ import requests
 import smtplib
 from bs4 import BeautifulSoup
 
-# Target URL
+# Set the URL of the website you want to monitor
 url = ''
 
-# Class you want to target
+# Set the CSS selector for the element you want to monitor
 selector = 'dddefault'
 
-# Create a previous value
-prev_value = ''
+# Set the initial value of the element
+prev_value = '0'
 
-# Make a request to  website
+# Make a request to the website
 response = requests.get(url)
 
 # Parse the HTML using BeautifulSoup
 soup = BeautifulSoup(response.text, 'html.parser')
 
-# Get a list of all elements of specific class
-elements = soup.find_all("", class_=selector)
-
-prev_class_4 = elements[3]
-
-for i, element in enumerate(elements):
-    if i == 3:
-        if element != prev_class_4:
-            print("Class 4 has changed!")
-            prev_class_4 = element
+# Get a list of all elements with the specified class
+elements = soup.find_all("td", class_=selector)
 
 # Set email and password
 username = "your_email"
@@ -53,6 +45,29 @@ body = ""
 # Format the email message
 msg = f"Subject: {subject}\n\n{body}"
 
-# Send the email
-smtp.sendmail(sender, recipient, msg)
+# prev_class_4 = elements[3]
+
+while True:
+    # Make a request to the website
+    response = requests.get(url)
+
+    # Parse the HTML using BeautifulSoup
+    soup = BeautifulSoup(response.text, 'html.parser')
+
+    # Get a list of all elements with the specified class
+    elements = soup.find_all("td", class_=selector)
+
+    # Check if the value of the third element has changed
+    if elements[3].text != prev_value:
+        # Update the previous value
+        prev_value = elements[3].text
+        smtp.sendmail(sender, recipient, msg)
+        print("sent")
+        smtp.quit()
+        break
+
+    else:
+        print("no changes")
+        continue
+
 smtp.quit()
