@@ -1,3 +1,4 @@
+import time
 import requests
 import smtplib
 from bs4 import BeautifulSoup
@@ -42,10 +43,14 @@ recipient = to_email
 subject = ""
 body = ""
 
+# Set email and password
+username = "your_email"
 # Format the email message
 msg = f"Subject: {subject}\n\n{body}"
 
-# prev_class_4 = elements[3]
+# Send the email
+smtp.sendmail(sender, recipient, msg)
+smtp.quit()
 
 while True:
     # Make a request to the website
@@ -67,7 +72,5 @@ while True:
         break
 
     else:
-        print("no changes")
+        time.sleep(5)
         continue
-
-smtp.quit()
