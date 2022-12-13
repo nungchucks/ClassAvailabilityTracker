@@ -6,6 +6,7 @@ Simply enter the URL of the course, the name of the HTML class  storing the amou
 This will require you to have an account SMTP access (smtp2go.com provides up to 1,000 emails for free). 
 
 Customizations: 
+
 You can change the find_all() selector to find() according to your needs. 
 Also, the if statement can be changed according to the specific element that you wish to track.  
 Finally, you can change the timer.sleep() count to whatever interval you would like the script to check the webpage for a change. 
