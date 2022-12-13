@@ -67,7 +67,6 @@ while True:
         # Update the previous value
         prev_value = elements[3].text
         smtp.sendmail(sender, recipient, msg)
-        print("sent")
         smtp.quit()
         break
 
