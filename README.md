@@ -11,4 +11,4 @@ Feel free to change the find_all() selector to find() according to your needs.
 Also, the if statement can be changed according to the specific element that you wish to track.  
 Finally, you can change the timer.sleep() count to whatever interval you would like the script to check the webpage for a change. 
 
-Overall, the entire script should feel fairly intutive, but feel free to reach out with any questions -> ### nungchucks@gmail.com
+Overall, the entire script should feel fairly intutive, but feel free to reach out with any questions -> ## nungchucks@gmail.com
