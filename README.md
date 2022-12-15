@@ -1,5 +1,5 @@
 ## ClassAvailabilityTracker 👩‍🏫🔎
-Tired of having to scour your school's website to see if a spot has opened up in a class? This simple python script will do it for you! 
+Tired of having to constantly check your school's website to see if a spot has opened up in a class? This simple python script will do it for you! 
 
 Simply enter the URL of the course you would like to track, the name of the HTML class  storing the number of spots open, and you will get an email notifying you whenever that element's value changes. 
 
